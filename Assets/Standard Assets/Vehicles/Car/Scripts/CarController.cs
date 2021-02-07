@@ -49,12 +49,29 @@ namespace UnityStandardAssets.Vehicles.Car
         private const float k_ReversingThreshold = 0.01f;
 
         public bool Skidding { get; private set; }
-        public float BrakeInput { get; private set; }
+        private float _brakeInput;
+        public float BrakeInput
+        {
+            get => _brakeInput; private set
+            {
+                if (value > 0)
+                {
+                    _brakeLight?.Active();
+                }
+                else
+                {
+                    _brakeLight?.DeActive();
+                }
+                _brakeInput = value;
+            }
+        }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
         public float CurrentSpeed{ get { return m_Rigidbody.velocity.magnitude*2.23693629f; }}
         public float MaxSpeed{get { return m_Topspeed; }}
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
+
+        private BrakeLight _brakeLight;
 
         // Use this for initialization
         private void Start()
@@ -67,7 +84,7 @@ namespace UnityStandardAssets.Vehicles.Car
             m_WheelColliders[0].attachedRigidbody.centerOfMass = m_CentreOfMassOffset;
 
             m_MaxHandbrakeTorque = float.MaxValue;
-
+            _brakeLight = GetComponentInChildren<BrakeLight>();
             m_Rigidbody = GetComponent<Rigidbody>();
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
         }

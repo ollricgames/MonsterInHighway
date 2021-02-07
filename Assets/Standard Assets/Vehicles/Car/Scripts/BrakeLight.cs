@@ -5,8 +5,6 @@ namespace UnityStandardAssets.Vehicles.Car
 {
     public class BrakeLight : MonoBehaviour
     {
-        public CarController car; // reference to the car controller, must be dragged in inspector
-
         private Renderer m_Renderer;
 
 
@@ -15,11 +13,15 @@ namespace UnityStandardAssets.Vehicles.Car
             m_Renderer = GetComponent<Renderer>();
         }
 
-
-        private void Update()
+        public void Active()
         {
-            // enable the Renderer when the car is braking, disable it otherwise.
-            m_Renderer.enabled = car.BrakeInput > 0f;
+            m_Renderer.enabled = true;
         }
+
+        public void DeActive()
+        {
+            m_Renderer.enabled = false;
+        }
+
     }
 }
