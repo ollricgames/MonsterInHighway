@@ -8,5 +8,6 @@
         void Active();
         void DeActive();
         void Interact(IInteractableObject obj);
+        void EndInteract(IInteractableObject obj);
     }
 }

@@ -66,29 +66,19 @@
         protected virtual void OnTriggerEnter(Collider other)
         {
             other.GetComponent<IInteractableObject>()?.Interact(this);
-            if (other.GetComponent<BaseCar>())
-            {
-                if(transform.position.z < other.transform.position.z)
-                {
-                    _brake = _acceleration > 0 ? _acceleration * -1 : _acceleration;
-                    _acceleration = _brake;
-                }
-            }
         }
 
         protected virtual void OnTriggerExit(Collider other)
         {
-            if (other.GetComponent<BaseCar>())
-            {
-                if (transform.position.z < other.transform.position.z)
-                {
-                    _acceleration = _acceleration < 0 ? _acceleration * -1 : _acceleration;
-                    _brake = 0;
-                }
-            }
+            other.GetComponent<IInteractableObject>()?.EndInteract(this);
         }
 
         public virtual void Interact(IInteractableObject obj)
+        {
+
+        }
+
+        public virtual void EndInteract(IInteractableObject obj)
         {
 
         }

@@ -1,5 +1,6 @@
 ﻿namespace Base.Game.GameObject.Interactional
 {
+    using Base.Game.Signal;
     using UnityEngine;
     public class NPCCar : BaseCar
     {
@@ -15,6 +16,12 @@
         {
             _target = isRightLine ? _rightLine : _leftLine;
             transform.rotation = Quaternion.Euler(Vector3.up * 180);
+        }
+
+        public override void DeActive()
+        {
+            base.DeActive();
+            SignalBus<SignalNPCCarDeActive, NPCCar>.Instance.Fire(this);
         }
 
         private void FixedUpdate()

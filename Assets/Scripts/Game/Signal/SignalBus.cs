@@ -81,4 +81,30 @@ namespace Base.Game.Signal
         }
     }
 
+    public class SignalBus<T, T1, T2,T3>
+    {
+        public static SignalBus<T, T1, T2,T3> Instance { get; private set; } = new SignalBus<T, T1, T2,T3>();
+        private List<Action<T1, T2,T3>> _actions;
+
+        private SignalBus() => _actions = new List<Action<T1, T2,T3>>();
+
+        public void Register(Action<T1, T2,T3> action)
+        {
+            if (_actions.Contains(action))
+                return;
+            _actions.Add(action);
+        }
+
+        public void UnRegister(Action<T1, T2,T3> action)
+        {
+            _actions.Remove(action);
+        }
+
+        public void Fire(T1 obj, T2 obj2, T3 obj3)
+        {
+            for (int i = 0; i < _actions.Count; i++)
+                _actions[i](obj, obj2, obj3);
+        }
+    }
+
 }

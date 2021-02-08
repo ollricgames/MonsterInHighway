@@ -1,18 +1,17 @@
 ﻿namespace Base.Game.Factory
 {
     using Base.Game.Signal;
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
     public class Factory<T, T1> : IFactory<T> where T : MonoBehaviour
     {
         private Queue<T> _pool;
-        private T _prefab;
+        private List<T> _prefabs;
         private Factory()
         {
             _pool = new Queue<T>();
+            _prefabs = new List<T>();
         }
         ~Factory()
         {
@@ -34,7 +33,7 @@
         {
             if (_pool.Count > 0)
                 return _pool.Dequeue();
-            return MonoBehaviour.Instantiate(_prefab.gameObject).GetComponent<T>();
+            return MonoBehaviour.Instantiate(_prefabs[UnityEngine.Random.Range(0, _prefabs.Count)].gameObject).GetComponent<T>();
         }
 
         public class Builder
@@ -48,13 +47,20 @@
 
             public Builder SetPrefab(T prefab)
             {
-                _factory._prefab = prefab;
+                if (!_factory._prefabs.Contains(prefab))
+                {
+                    _factory._prefabs.Add(prefab);
+                }
                 return this;
             }
 
             public Builder SetPrefab(string prefabPath)
             {
-                _factory._prefab = Resources.Load<GameObject>(prefabPath).GetComponent<T>();
+                T prefab = Resources.Load<GameObject>(prefabPath).GetComponent<T>();
+                if (!_factory._prefabs.Contains(prefab))
+                {
+                    _factory._prefabs.Add(prefab);
+                }
                 return this;
             }
 

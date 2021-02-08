@@ -9,5 +9,6 @@
         void Active();
         void DeActive();
         void Interact(IInteractionalObject obj);
+        void EndInteract(IInteractionalObject obj);
     }
 }
