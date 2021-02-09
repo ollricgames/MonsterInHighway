@@ -1,6 +1,7 @@
 ﻿namespace Base.Game.GameObject.Interactional
 {
     using Base.Game.GameObject.Interactable;
+    using Base.Game.Signal;
     using System;
     using UnityEngine;
     using UnityStandardAssets.Vehicles.Car;
@@ -10,6 +11,7 @@
     {
         [SerializeField] protected Vector3 _rightLine = Vector3.zero;
         [SerializeField] protected Vector3 _leftLine = Vector3.zero;
+        [Range(0, 1)] [SerializeField] protected float _defaultAcceleration = .3f;
 
         protected CarController _controller;
 
@@ -28,13 +30,22 @@
         {
             _controller = GetComponent<CarController>();
             _target = _rightLine;
+            _acceleration = _defaultAcceleration;
         }
 
         protected virtual void Move()
         {
-            _controller.Move(_steering, _acceleration, _brake, _handbrake);
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), .1f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), .5f);
+            _controller.Move(_steering, _acceleration, _acceleration, _handbrake);
+        }
+
+        public virtual void Brake()
+        {
+            _acceleration = -1 * _defaultAcceleration;
+        }
+
+        public virtual void BrakeOff()
+        {
+            _acceleration = _defaultAcceleration;
         }
 
         protected virtual void KeepInLine()
@@ -47,6 +58,11 @@
         }
 
         public Transform Transform => transform;
+
+        public void SetPosition(Vector3 pos)
+        {
+            transform.position = pos;
+        }
 
         public virtual void Active()
         {

@@ -9,7 +9,7 @@
     [RequireComponent(typeof(Collider))]
     public class BasePlatform : MonoBehaviour, IInteractableObject
     {
-        [SerializeField] private Transform _endPoint;
+        [SerializeField] private Transform _endPoint = null;
         public Vector3 EndPoint { get => _endPoint.position; }
 
         public Transform Transform => transform;
@@ -26,6 +26,21 @@
             transform.position = pos;
         }
 
+        public void SpawnInteractionalObjectOnPlatform(IInteractionalObject obj)
+        {
+            if (obj == null)
+                return;
+            if(obj is NPCCar car)
+            {
+                car.Transform.position = transform.position;
+                car.PlaceOnLine(Random.Range(0, 2) == 0);
+            }
+            else if(obj is PlayerCar)
+            {
+                obj.Transform.position = transform.position;
+            }
+        }
+
         public void Active()
         {
             gameObject.SetActive(true);
@@ -39,9 +54,14 @@
             gameObject.SetActive(false);
         }
 
+        private void OnDisable()
+        {
+            SignalBus<SignalPlatformDeActive, BasePlatform>.Instance.Fire(this);
+        }
+
         public void Interact(IInteractionalObject obj)
         {
-            if (_onObjects.Contains(obj))
+            if (_onObjects.Contains(obj) || obj is PlayerCar)
                 return;
             _onObjects.Add(obj);
         }
@@ -49,6 +69,10 @@
         public void EndInteract(IInteractionalObject obj)
         {
             _onObjects.Remove(obj);
+            if(obj is PlayerCar)
+            {
+                SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Fire(this);
+            }
         }
     }
 }

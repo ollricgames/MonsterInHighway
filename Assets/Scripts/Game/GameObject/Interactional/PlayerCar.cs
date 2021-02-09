@@ -14,21 +14,43 @@
 
         private Collider _collider;
 
+        private bool _chassisUp = false;
+
         protected override void Initialize()
         {
             base.Initialize();
             Registration();
-            _acceleration = 1f;
             _defaultBodyPos = _carBody.transform.localPosition;
             _bodyPosTarget = _defaultBodyPos;
             _bodyUpSpeed *= Time.fixedDeltaTime;
             _collider = GetComponent<Collider>();
         }
 
+        public override void Active()
+        {
+            base.Active();
+            Registration();
+            SignalBus<SignalPlayerCarSpawn, PlayerCar>.Instance.Fire(this);
+        }
+
         public override void DeActive()
         {
             base.DeActive();
             UnRegistration();
+        }
+
+        public override void Brake()
+        {
+            if (_chassisUp)
+                return;
+            base.Brake();
+        }
+
+        protected override void Move()
+        {
+            base.Move();
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), .1f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), .5f);
         }
 
         private void FixedUpdate()
@@ -59,6 +81,7 @@
         {
             _bodyPosTarget = obj ? _defaultBodyPos + (Vector3.up) * _carBodyUpDistance : _defaultBodyPos;
             _collider.enabled = !obj;
+            _chassisUp = obj;
         }
 
         private void OnLineChanged(bool isLeftLine)
