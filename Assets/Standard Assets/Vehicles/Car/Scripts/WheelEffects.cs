@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
-    [RequireComponent(typeof (AudioSource))]
     public class WheelEffects : MonoBehaviour
     {
         public Transform SkidTrailPrefab;

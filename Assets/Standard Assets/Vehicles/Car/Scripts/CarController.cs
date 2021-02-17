@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 #pragma warning disable 649
@@ -65,6 +67,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 _brakeInput = value;
             }
         }
+        public GameObject[] WheelMeshes { get => m_WheelMeshes; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
         public float CurrentSpeed{ get { return m_Rigidbody.velocity.magnitude*2.23693629f; }}
         public float MaxSpeed{get { return m_Topspeed; }}
@@ -179,8 +182,12 @@ namespace UnityStandardAssets.Vehicles.Car
                 m_WheelColliders[2].brakeTorque = hbTorque;
                 m_WheelColliders[3].brakeTorque = hbTorque;
             }
-
-
+            else
+            {
+                m_WheelColliders[2].brakeTorque = 0;
+                m_WheelColliders[3].brakeTorque = 0;
+            }
+            
             CalculateRevs();
             GearChanging();
 
@@ -199,7 +206,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
                     speed *= 2.23693629f;
                     if (speed > m_Topspeed)
+                    {
                         m_Rigidbody.velocity = (m_Topspeed/2.23693629f) * m_Rigidbody.velocity.normalized;
+                    }
                     break;
 
                 case SpeedType.KPH:
@@ -303,7 +312,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     // if they do it can lead to some strange audio artefacts
                     if (!AnySkidSoundPlaying())
                     {
-                        m_WheelEffects[i].PlayAudio();
+                        //m_WheelEffects[i].PlayAudio();
                     }
                     continue;
                 }
@@ -311,7 +320,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 // if it wasnt slipping stop all the audio
                 if (m_WheelEffects[i].PlayingAudio)
                 {
-                    m_WheelEffects[i].StopAudio();
+                    //m_WheelEffects[i].StopAudio();
                 }
                 // end the trail generation
                 m_WheelEffects[i].EndSkidTrail();

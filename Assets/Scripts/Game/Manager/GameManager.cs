@@ -30,7 +30,6 @@
 
         private void Initialize()
         {
-            Application.targetFrameRate = 60;
             _interactionalObjectInGame = new List<IInteractionalObject>();
             _interactableObjectInGame = new List<IInteractableObject>();
             _playerCarPassedOverPlatforms = new Queue<BasePlatform>();
@@ -53,27 +52,29 @@
         {
             SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.UnRegister(OnPlayerCarPassedOver);
         }
-
+        private int _lastSpawnedOfPlatformCount = 0;
         private void OnPlayerCarPassedOver(BasePlatform obj)
         {
             if (_playerCarPassedOverPlatforms.Contains(obj))
                 return;
             _playerCarPassedOverPlatforms.Enqueue(obj);
-            if(_playerCarPassedOverPlatforms.Count > 2)
+            if(_playerCarPassedOverPlatforms.Count > 1 && _lastSpawnedOfPlatformCount > 1)
             {
                 BasePlatform newPlatform = _platformFactory.GetObject();
                 newPlatform.SetPosition(_lastPlatform.EndPoint);
                 newPlatform.Active();
                 _lastPlatform = newPlatform;
                 NPCCar npcCar = null;
-                if(UnityEngine.Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 5) == 0)
                 {
                     npcCar = _npcCarFactory.GetObject();
                     npcCar.Active();
                 }
                 _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
                 _playerCarPassedOverPlatforms.Dequeue().DeActive();
+                _lastSpawnedOfPlatformCount = 0;
             }
+            _lastSpawnedOfPlatformCount++;
         }
 
         private void SetFactories()
@@ -115,10 +116,14 @@
             _interactionalObjectInGame.Add(playerCar);
             for(int i = 2; i < _interactableObjectInGame.Count; i++)
             {
-                NPCCar npcCar = _npcCarFactory.GetObject();
-                npcCar.Active();
+                NPCCar npcCar = null;
+                if (UnityEngine.Random.Range(0, 5) == 0)
+                {
+                    npcCar = _npcCarFactory.GetObject();
+                    npcCar.Active();
+                    _interactionalObjectInGame.Add(npcCar);
+                }
                 (_interactableObjectInGame[i] as BasePlatform).SpawnInteractionalObjectOnPlatform(npcCar);
-                _interactionalObjectInGame.Add(npcCar);
             }
         }
 

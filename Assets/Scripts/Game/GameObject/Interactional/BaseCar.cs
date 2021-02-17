@@ -36,16 +36,18 @@
         protected virtual void Move()
         {
             _controller.Move(_steering, _acceleration, _acceleration, _handbrake);
+            if (transform.position.y < -100)
+                DeActive();
         }
 
         public virtual void Brake()
         {
-            _acceleration = -1 * _defaultAcceleration;
+            _handbrake = 1;
         }
 
         public virtual void BrakeOff()
         {
-            _acceleration = _defaultAcceleration;
+            _handbrake = 0;
         }
 
         protected virtual void KeepInLine()
