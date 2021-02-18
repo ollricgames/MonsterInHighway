@@ -84,11 +84,15 @@
                                     .SetHandle()
                                     .Build();
             _npcCarFactory = new Factory<NPCCar, SignalNPCCarDeActive>.Builder()
-                                 .SetPrefab("NPCCar")
+                                 .SetPrefab("Car3")
                                  .SetHandle()
                                  .Build();
             _platformFactory = new Factory<BasePlatform, SignalPlatformDeActive>.Builder()
-                                   .SetPrefab("Platform")
+                                   .SetPrefab("Platform1")
+                                   .SetPrefab("Platform2")
+                                   .SetPrefab("Platform3")
+                                   .SetPrefab("Platform4")
+                                   .SetPrefab("Platform5")
                                    .SetHandle()
                                    .Build();
         }
@@ -117,7 +121,7 @@
             for(int i = 2; i < _interactableObjectInGame.Count; i++)
             {
                 NPCCar npcCar = null;
-                if (UnityEngine.Random.Range(0, 5) == 0)
+                if (UnityEngine.Random.Range(0, 2) == 0)
                 {
                     npcCar = _npcCarFactory.GetObject();
                     npcCar.Active();

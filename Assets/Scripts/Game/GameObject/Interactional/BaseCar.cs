@@ -43,11 +43,13 @@
         public virtual void Brake()
         {
             _handbrake = 1;
+            _acceleration = _defaultAcceleration * -1;
         }
 
         public virtual void BrakeOff()
         {
             _handbrake = 0;
+            _acceleration = _defaultAcceleration;
         }
 
         protected virtual void KeepInLine()

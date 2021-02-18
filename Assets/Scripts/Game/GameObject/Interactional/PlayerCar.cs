@@ -51,8 +51,8 @@
 
         protected override void KeepInLine()
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), _controller.CurrentSpeed / (_controller.MaxSpeed * 10));
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), _controller.CurrentSpeed / (_controller.MaxSpeed / 20));
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), _controller.CurrentSpeed / (_controller.MaxSpeed * 4));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), _controller.CurrentSpeed / (_controller.MaxSpeed / 35));
             if (transform.rotation.y > .3f || transform.rotation.y < -.3f)
             {
                 Brake();
@@ -116,6 +116,16 @@
         private void OnLineChanged(bool isLeftLine)
         {
             _target = isLeftLine ? _leftLine : _rightLine;
+        }
+
+        public void CarEnterTunnel()
+        {
+            SignalBus<SignalCarOnTunnel, bool>.Instance.Fire(true);
+        }
+
+        public void CarExitTunnel()
+        {
+            SignalBus<SignalCarOnTunnel, bool>.Instance.Fire(false);
         }
 
     }

@@ -43,6 +43,7 @@
 
         public void Active()
         {
+            transform.rotation = Quaternion.Euler(Vector3.up * -90);
             gameObject.SetActive(true);
         }
 
