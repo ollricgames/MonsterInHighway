@@ -9,6 +9,7 @@
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+
     public class GameManager : MonoBehaviour
     {
         private IFactory<PlayerCar> _playerCarFactory;
@@ -21,7 +22,7 @@
 
         private int _totalActivatePlatformCount;
         private BasePlatform _lastPlatform;
-        private Queue<BasePlatform> _playerCarPassedOverPlatforms;
+        private List<BasePlatform> _playerCarPassedOverPlatforms;
 
         private void Awake()
         {
@@ -32,7 +33,7 @@
         {
             _interactionalObjectInGame = new List<IInteractionalObject>();
             _interactableObjectInGame = new List<IInteractableObject>();
-            _playerCarPassedOverPlatforms = new Queue<BasePlatform>();
+            _playerCarPassedOverPlatforms = new List<BasePlatform>();
             Registration();
             SetFactories();
             InitialMap();
@@ -46,32 +47,42 @@
         private void Registration()
         {
             SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Register(OnPlayerCarPassedOver);
+            SignalBus<SignalPlatformDeActive, BasePlatform>.Instance.Register(OnPlatformDeActive);
         }
 
         private void UnRegistration()
         {
+            SignalBus<SignalPlatformDeActive, BasePlatform>.Instance.UnRegister(OnPlatformDeActive);
             SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.UnRegister(OnPlayerCarPassedOver);
         }
+
+        private void OnPlatformDeActive(BasePlatform obj)
+        {
+            _playerCarPassedOverPlatforms.Remove(obj);
+        }
+
         private int _lastSpawnedOfPlatformCount = 0;
+        private int _count = 0;
         private void OnPlayerCarPassedOver(BasePlatform obj)
         {
             if (_playerCarPassedOverPlatforms.Contains(obj))
                 return;
-            _playerCarPassedOverPlatforms.Enqueue(obj);
-            if(_playerCarPassedOverPlatforms.Count > 1 && _lastSpawnedOfPlatformCount > 1)
+            _playerCarPassedOverPlatforms.Add(obj);
+            if(_playerCarPassedOverPlatforms.Count > 8)
             {
                 BasePlatform newPlatform = _platformFactory.GetObject();
                 newPlatform.SetPosition(_lastPlatform.EndPoint);
                 newPlatform.Active();
                 _lastPlatform = newPlatform;
                 NPCCar npcCar = null;
-                if(UnityEngine.Random.Range(0, 5) == 0)
+                if(UnityEngine.Random.Range(0, 3) == 0)
                 {
                     npcCar = _npcCarFactory.GetObject();
                     npcCar.Active();
                 }
                 _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
-                _playerCarPassedOverPlatforms.Dequeue().DeActive();
+                BasePlatform newPlat = _playerCarPassedOverPlatforms[0];
+                newPlat.DeActive();
                 _lastSpawnedOfPlatformCount = 0;
             }
             _lastSpawnedOfPlatformCount++;
@@ -84,14 +95,19 @@
                                     .SetHandle()
                                     .Build();
             _npcCarFactory = new Factory<NPCCar, SignalNPCCarDeActive>.Builder()
+                                 .SetPrefab("Car1")
+                                 .SetPrefab("Car2")
                                  .SetPrefab("Car3")
+                                 .SetPrefab("Car4")
                                  .SetHandle()
                                  .Build();
             _platformFactory = new Factory<BasePlatform, SignalPlatformDeActive>.Builder()
                                    .SetPrefab("Platform1")
+                                   .SetPrefab("Platform4")
                                    .SetPrefab("Platform2")
                                    .SetPrefab("Platform3")
-                                   .SetPrefab("Platform4")
+                                   .SetPrefab("Platform7")
+                                   .SetPrefab("Platform6")
                                    .SetPrefab("Platform5")
                                    .SetHandle()
                                    .Build();

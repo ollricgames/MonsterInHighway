@@ -4,7 +4,7 @@
     using UnityEngine;
     public class NPCCar : BaseCar
     {
-
+        [SerializeField] private Transform _chassisTransform = null;
         protected override void Initialize()
         {
             base.Initialize();
@@ -24,7 +24,9 @@
         public override void Active()
         {
             base.Active();
-            _acceleration = Random.Range(0f, .5f);
+            _acceleration = .5f;
+            _handbrake = 0f;
+            _chassisTransform.localScale = Vector3.one;
         }
 
         protected override void Move()
@@ -38,6 +40,13 @@
         {
             KeepInLine();
             Move();
+        }
+
+        public void Crashed(float _squeezeValue)
+        {
+            _chassisTransform.localScale = new Vector3(1f, _squeezeValue, 1f);
+            _acceleration = _defaultAcceleration * -1;
+            _handbrake = 1f;
         }
     }
 }

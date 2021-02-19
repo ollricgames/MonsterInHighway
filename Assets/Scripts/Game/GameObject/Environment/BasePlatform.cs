@@ -62,18 +62,36 @@
 
         public void Interact(IInteractionalObject obj)
         {
-            if (_onObjects.Contains(obj) || obj is PlayerCar)
-                return;
-            _onObjects.Add(obj);
         }
 
         public void EndInteract(IInteractionalObject obj)
         {
-            _onObjects.Remove(obj);
-            if(obj is PlayerCar)
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            BaseCar obj = other.GetComponent<BaseCar>();
+            if (obj)
             {
-                SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Fire(this);
+                if (obj is PlayerCar)
+                {
+                    SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Fire(this);
+                }
+                if (_onObjects.Contains(obj) || obj is PlayerCar)
+                    return;
+                _onObjects.Add(obj);
             }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            BaseCar obj = other.GetComponent<BaseCar>();
+            if (obj)
+            {
+                _onObjects.Remove(obj);
+            }
+        }
+
     }
 }

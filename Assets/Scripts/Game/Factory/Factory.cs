@@ -59,6 +59,9 @@
                 T prefab = Resources.Load<GameObject>(prefabPath).GetComponent<T>();
                 if (!_factory._prefabs.Contains(prefab))
                 {
+                    T initialObject = MonoBehaviour.Instantiate(prefab).GetComponent<T>();
+                    initialObject.gameObject.SetActive(false);
+                    _factory._pool.Enqueue(initialObject);
                     _factory._prefabs.Add(prefab);
                 }
                 return this;

@@ -1,5 +1,7 @@
 ﻿namespace Base.Game.GameObject.Interactional
 {
+    using Base.Game.GameObject.Environment;
+    using Base.Game.GameObject.Interactable;
     using Base.Game.Signal;
     using System;
     using System.Collections.Generic;
@@ -15,6 +17,10 @@
         private Vector3 _defaultBodyPos;
         private Vector3 _bodyPosTarget;
 
+        private float _timer = 0;
+
+        private BasePlatform _onPlatform;
+        private bool _onRoad = false;
 
         private bool _chassisUp = false;
         public bool ChassisUp { get => _chassisUp; }
@@ -51,8 +57,8 @@
 
         protected override void KeepInLine()
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), _controller.CurrentSpeed / (_controller.MaxSpeed * 4));
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), _controller.CurrentSpeed / (_controller.MaxSpeed / 35));
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 30 * 6)) + .04f);
             if (transform.rotation.y > .3f || transform.rotation.y < -.3f)
             {
                 Brake();
@@ -73,8 +79,47 @@
             Move();
             KeepInLine();
             SetCarBodyPosition();
+            ControlOnRoad();
         }
 
+        private void ControlOnRoad()
+        {
+            if(!_onRoad)
+                _timer += Time.fixedDeltaTime;
+            if(_timer > 8f)
+            {
+                transform.position = _onPlatform.transform.position;
+            }
+        }
+
+        protected override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+            if(other.GetComponent<BasePlatform>())
+            {
+                _onPlatform = other.GetComponent<BasePlatform>();
+                _onRoad = true;
+                _timer = 0;
+            }
+        }
+        protected override void OnTriggerExit(Collider other)
+        {
+            base.OnTriggerExit(other);
+            if (other.GetComponent<BasePlatform>())
+            {
+                _onRoad = false;
+                _timer = 0;
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<BasePlatform>())
+            {
+                _onRoad = true;
+                _timer = 0;
+            }
+        }
         private void SetCarBodyPosition()
         {
             _carBody.transform.localPosition = Vector3.MoveTowards(_carBody.transform.localPosition, _bodyPosTarget, _bodyUpSpeed);

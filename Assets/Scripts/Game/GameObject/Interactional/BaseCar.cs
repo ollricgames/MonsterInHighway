@@ -14,7 +14,7 @@
         [Range(0, 1)] [SerializeField] protected float _defaultAcceleration = .3f;
 
         protected CarController _controller;
-
+        public float CurrentSpeed { get => _controller.CurrentSpeed; }
         protected float _steering;
         protected float _acceleration;
         protected float _brake;
