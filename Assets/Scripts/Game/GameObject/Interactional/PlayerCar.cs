@@ -58,7 +58,7 @@
         protected override void KeepInLine()
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 30 * 6)) + .04f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 20 * 6)) + .04f);
             if (transform.rotation.y > .3f || transform.rotation.y < -.3f)
             {
                 Brake();

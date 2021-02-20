@@ -33,7 +33,7 @@
             if(obj is NPCCar car)
             {
                 car.Transform.position = transform.position;
-                car.PlaceOnLine(Random.Range(0, 2) == 0);
+                car.PlaceOnLine(Random.Range(0, 3) != 0);
             }
             else if(obj is PlayerCar)
             {

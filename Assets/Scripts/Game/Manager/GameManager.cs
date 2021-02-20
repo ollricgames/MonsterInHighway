@@ -68,14 +68,14 @@
             if (_playerCarPassedOverPlatforms.Contains(obj))
                 return;
             _playerCarPassedOverPlatforms.Add(obj);
-            if(_playerCarPassedOverPlatforms.Count > 8)
+            if(_playerCarPassedOverPlatforms.Count > 5)
             {
                 BasePlatform newPlatform = _platformFactory.GetObject();
                 newPlatform.SetPosition(_lastPlatform.EndPoint);
                 newPlatform.Active();
                 _lastPlatform = newPlatform;
                 NPCCar npcCar = null;
-                if(UnityEngine.Random.Range(0, 3) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     npcCar = _npcCarFactory.GetObject();
                     npcCar.Active();
@@ -91,24 +91,15 @@
         private void SetFactories()
         {
             _playerCarFactory = new Factory<PlayerCar, SignalPlayerCarDeActive>.Builder()
-                                    .SetPrefab("PlayerCar")
+                                    .AddPrefab("PlayerCar")
                                     .SetHandle()
                                     .Build();
             _npcCarFactory = new Factory<NPCCar, SignalNPCCarDeActive>.Builder()
-                                 .SetPrefab("Car1")
-                                 .SetPrefab("Car2")
-                                 .SetPrefab("Car3")
-                                 .SetPrefab("Car4")
+                                 .AddAllPrefabOnPath("NPCCars")
                                  .SetHandle()
                                  .Build();
             _platformFactory = new Factory<BasePlatform, SignalPlatformDeActive>.Builder()
-                                   .SetPrefab("Platform1")
-                                   .SetPrefab("Platform4")
-                                   .SetPrefab("Platform2")
-                                   .SetPrefab("Platform3")
-                                   .SetPrefab("Platform7")
-                                   .SetPrefab("Platform6")
-                                   .SetPrefab("Platform5")
+                                   .AddAllPrefabOnPath("Platforms")
                                    .SetHandle()
                                    .Build();
         }
