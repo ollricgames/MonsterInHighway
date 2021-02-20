@@ -56,7 +56,7 @@
         {
             if (Math.Abs(transform.position.x - _target.x) > .05f || Math.Abs(transform.rotation.eulerAngles.y) > 1f)
             {
-                Vector3 t = new Vector3(_target.x, transform.position.y, transform.position.z + 1);
+                Vector3 t = new Vector3(_target.x, transform.position.y, transform.position.z + 5);
                 _steering = (transform.position - t).normalized.x * -1;
             }
         }

@@ -56,7 +56,7 @@
         {
             Rigidbody body = gameObject.AddComponent<Rigidbody>();
 
-            _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed, transform.position, 10F, 3f);
+            _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
             yield return new WaitForSeconds(2f);
             Destroy(body);
             _routine = null;

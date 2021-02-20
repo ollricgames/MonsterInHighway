@@ -5,7 +5,7 @@
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private Joystick _joystick = null;
-
+        private bool _gameStarted = false;
         private void Update()
         {
             if (!_joystick)
@@ -23,6 +23,11 @@
                 SignalBus<SignalCarBrake, bool>.Instance.Fire(true);
             else
                 SignalBus<SignalCarBrake, bool>.Instance.Fire(false);
+            if (Input.GetMouseButtonDown(0) && !_gameStarted)
+            {
+                _gameStarted = true;
+                SignalBus<SignalStartGame>.Instance.Fire();
+            }
 
         }
 

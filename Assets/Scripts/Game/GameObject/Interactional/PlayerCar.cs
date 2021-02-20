@@ -100,6 +100,7 @@
                 _onPlatform = other.GetComponent<BasePlatform>();
                 _onRoad = true;
                 _timer = 0;
+                BrakeOff();
             }
         }
         protected override void OnTriggerExit(Collider other)
@@ -107,8 +108,9 @@
             base.OnTriggerExit(other);
             if (other.GetComponent<BasePlatform>())
             {
+                if(_timer > .5f)
+                    Brake();
                 _onRoad = false;
-                _timer = 0;
             }
         }
 

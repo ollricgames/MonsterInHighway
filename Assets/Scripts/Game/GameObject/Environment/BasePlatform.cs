@@ -16,6 +16,9 @@
 
         private List<IInteractionalObject> _onObjects;
 
+        public bool IsEmpty { get => _onObjects.Count == 0 && !_playerIn; }
+        private bool _playerIn = false;
+
         private void Awake()
         {
             _onObjects = new List<IInteractionalObject>();
@@ -33,7 +36,8 @@
             if(obj is NPCCar car)
             {
                 car.Transform.position = transform.position;
-                car.PlaceOnLine(Random.Range(0, 3) != 0);
+                car.PlaceOnLine(Random.Range(0, 2) != 0);
+                _onObjects.Add(obj);
             }
             else if(obj is PlayerCar)
             {
@@ -44,6 +48,7 @@
         public void Active()
         {
             transform.rotation = Quaternion.Euler(Vector3.up * -90);
+            _playerIn = false;
             gameObject.SetActive(true);
         }
 
@@ -77,6 +82,7 @@
                 if (obj is PlayerCar)
                 {
                     SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Fire(this);
+                    _playerIn = true;
                 }
                 if (_onObjects.Contains(obj) || obj is PlayerCar)
                     return;
@@ -89,6 +95,8 @@
             BaseCar obj = other.GetComponent<BaseCar>();
             if (obj)
             {
+                if (obj is PlayerCar)
+                    _playerIn = false;
                 _onObjects.Remove(obj);
             }
         }
