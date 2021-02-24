@@ -26,6 +26,7 @@
         public bool ChassisUp { get => _chassisUp; }
 
         private List<Wheel> _wheels;
+        private Rigidbody _body;
 
         protected override void Initialize()
         {
@@ -39,6 +40,7 @@
             {
                 _wheels.Add(wheel.GetComponent<Wheel>());
             }
+            _body = GetComponent<Rigidbody>();
         }
 
         public override void Active()
@@ -58,7 +60,7 @@
         protected override void KeepInLine()
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 20 * 6)) + .04f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 3f * 1)) + .04f);
             if (transform.rotation.y > .3f || transform.rotation.y < -.3f)
             {
                 Brake();
@@ -129,27 +131,35 @@
 
         private void Registration()
         {
-            SignalBus<SignalLineChange, bool>.Instance.Register(OnLineChanged);
-            SignalBus<SignalCarChassisUp, bool>.Instance.Register(OnChassisUp);
-            SignalBus<SignalCarBrake, bool>.Instance.Register(OnHandleBrake);
+            SignalBus<SignalJoystickMultipier, float, float>.Instance.Register(OnJoystickMultipier);
         }
 
         private void UnRegistration()
         {
-            SignalBus<SignalLineChange, bool>.Instance.UnRegister(OnLineChanged);
-            SignalBus<SignalCarChassisUp, bool>.Instance.UnRegister(OnChassisUp);
-            SignalBus<SignalCarBrake, bool>.Instance.UnRegister(OnHandleBrake);
+            SignalBus<SignalJoystickMultipier, float, float>.Instance.UnRegister(OnJoystickMultipier);
         }
 
-        private void OnHandleBrake(bool obj)
+        private void OnJoystickMultipier(float h, float v)
         {
-            if (obj)
+            if(h < -.5f)
+            {
+                OnLineChanged(true);
+            }else if(h > .5f)
+            {
+                OnLineChanged(false);
+            }
+            if(v < -.5f)
             {
                 Brake();
+            }else if(v > .5f)
+            {
+                OnChassisUp(true);
+                BrakeOff();
             }
             else
             {
                 BrakeOff();
+                OnChassisUp(false);
             }
         }
 

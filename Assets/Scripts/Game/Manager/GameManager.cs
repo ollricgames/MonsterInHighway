@@ -24,6 +24,8 @@
         private BasePlatform _lastPlatform;
         private List<BasePlatform> _playerCarPassedOverPlatforms;
 
+        private PlayerCar _playerCar;
+
         private void Awake()
         {
             Initialize();
@@ -77,7 +79,7 @@
                 do
                 {
                     randomPlat = _interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)];
-                    if (randomPlat.IsEmpty)
+                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 10f)
                     {
                         NPCCar npcCar = _npcCarFactory.GetObject();
                         npcCar.Active();
@@ -168,6 +170,7 @@
         {
             PlayerCar playerCar = _playerCarFactory.GetObject();
             (_interactableObjectInGame[1] as BasePlatform).SpawnInteractionalObjectOnPlatform(playerCar);
+            _playerCar = playerCar;
             playerCar.Active();
             _interactionalObjectInGame.Add(playerCar);
         }
