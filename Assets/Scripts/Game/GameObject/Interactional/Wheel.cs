@@ -41,7 +41,7 @@
             if((obj as PlayerCar).ChassisUp)
             {
                 float target = _defaultPos.position.x + (_isRightWheel ? 1f : -1f);
-                _collider.transform.position = Vector3.MoveTowards(_collider.transform.position, new Vector3(target, _collider.transform.position.y, _defaultPos.transform.position.z), Time.deltaTime * 2);
+                _collider.transform.position = Vector3.MoveTowards(_collider.transform.position, new Vector3(target, _collider.transform.position.y, _collider.transform.position.z), Time.deltaTime * 2);
             }
             else
             {

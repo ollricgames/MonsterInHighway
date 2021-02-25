@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 84421467098843267}
   - component: {fileID: 6857431025856769752}
   - component: {fileID: 2163587372742073506}
+  - component: {fileID: 6540029571851626629}
   m_Layer: 0
   m_Name: Cactus_Tall_04 (11)
   m_TagString: Untagged
@@ -107,6 +108,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6540029571851626629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467101107779}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.859958, z: 3}
+  m_Center: {x: 0.0004515351, y: 1.8148775, z: 0.000022888184}
 --- !u!1 &84421467102374505
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +134,7 @@ GameObject:
   - component: {fileID: 84421467104572585}
   - component: {fileID: 543478774820159340}
   - component: {fileID: 8076680879417289147}
+  - component: {fileID: 5924672379190687132}
   m_Layer: 0
   m_Name: Cactus_Leafy_02 (2)
   m_TagString: Untagged
@@ -214,6 +229,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5924672379190687132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467102374505}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.466243, z: 3}
+  m_Center: {x: 0.06722651, y: 0.7539935, z: 0.043102186}
 --- !u!1 &84421467204131884
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +255,7 @@ GameObject:
   - component: {fileID: 84421467206058732}
   - component: {fileID: 6489819588061034690}
   - component: {fileID: 4435860615964111778}
+  - component: {fileID: 8574174971520352029}
   m_Layer: 0
   m_Name: Rock_Heavy (2)
   m_TagString: Untagged
@@ -321,6 +350,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8574174971520352029
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467204131884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.805209, z: 3}
+  m_Center: {x: -0.000011444092, y: 0.8818744, z: 2.5064384e-14}
 --- !u!1 &84421467340223740
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84421467340223740}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 33.479996, y: 8.6717205, z: -57.380005}
+  m_LocalPosition: {x: 33.479996, y: 8.17, z: -57.380005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 84421468198120672}
@@ -380,6 +422,7 @@ GameObject:
   - component: {fileID: 84421467513329514}
   - component: {fileID: 3562737848382874260}
   - component: {fileID: 5524912404331683474}
+  - component: {fileID: 3495500151002048034}
   m_Layer: 0
   m_Name: Cactus_Leafy_02 (7)
   m_TagString: Untagged
@@ -474,6 +517,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3495500151002048034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467515521450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.466243, z: 3}
+  m_Center: {x: 0.06721697, y: 0.7539936, z: 0.043123644}
 --- !u!1 &84421467571513520
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +543,7 @@ GameObject:
   - component: {fileID: 84421467573778032}
   - component: {fileID: 2840351633956744455}
   - component: {fileID: 5590196631173166813}
+  - component: {fileID: 5035477930764176611}
   m_Layer: 0
   m_Name: Rock_Medium (1)
   m_TagString: Untagged
@@ -581,6 +638,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5035477930764176611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467571513520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.357031, z: 3}
+  m_Center: {x: -0.000009536743, y: 0.17851502, z: 0.0000038146973}
 --- !u!1 &84421467696059145
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +664,7 @@ GameObject:
   - component: {fileID: 84421467694058953}
   - component: {fileID: 8513954012174788709}
   - component: {fileID: 5609358171975966412}
+  - component: {fileID: 2733756159977531402}
   m_Layer: 0
   m_Name: Cactus_Tall_04
   m_TagString: Untagged
@@ -688,6 +759,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2733756159977531402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467696059145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.859958, z: 3}
+  m_Center: {x: 0.0004629792, y: 1.8148777, z: -0.0000038146973}
 --- !u!1 &84421467943850485
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +785,7 @@ GameObject:
   - component: {fileID: 84421467941850933}
   - component: {fileID: 1770985747633037713}
   - component: {fileID: 4268319921690451694}
+  - component: {fileID: 8721809411345760583}
   m_Layer: 0
   m_Name: Cactus_Tall_03 (11)
   m_TagString: Untagged
@@ -795,6 +880,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8721809411345760583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421467943850485}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.843629, z: 3}
+  m_Center: {x: -0.017303292, y: 1.8517222, z: 0.0014506284}
 --- !u!1 &84421468197892288
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +906,7 @@ GameObject:
   - component: {fileID: 84421468199890432}
   - component: {fileID: 805619403483453022}
   - component: {fileID: 1082811437154464364}
+  - component: {fileID: 1651410934278691514}
   m_Layer: 0
   m_Name: Rock_Medium
   m_TagString: Untagged
@@ -902,6 +1001,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1651410934278691514
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468197892288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.357031, z: 3}
+  m_Center: {x: -0.000019073486, y: 0.17851543, z: 0.0000076293945}
 --- !u!1 &84421468339659800
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,6 +1027,7 @@ GameObject:
   - component: {fileID: 84421468341926616}
   - component: {fileID: 5432649186425461717}
   - component: {fileID: 466216342880636361}
+  - component: {fileID: 8666218299634673496}
   m_Layer: 0
   m_Name: Rock_Large (4)
   m_TagString: Untagged
@@ -1009,6 +1122,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8666218299634673496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468339659800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 4.0906887, z: 3}
+  m_Center: {x: 0.0748923, y: 1.9607873, z: -0.03360767}
 --- !u!1 &84421468428566606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1148,7 @@ GameObject:
   - component: {fileID: 84421468430573198}
   - component: {fileID: 6656368570927502100}
   - component: {fileID: 8127241597416970426}
+  - component: {fileID: 5887022029602810135}
   m_Layer: 0
   m_Name: Cactus_Tall_03 (5)
   m_TagString: Untagged
@@ -1116,6 +1243,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5887022029602810135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468428566606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.843629, z: 3}
+  m_Center: {x: -0.01730043, y: 1.8517222, z: 0.001442999}
 --- !u!1 &84421468504686048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1269,7 @@ GameObject:
   - component: {fileID: 84421468502483744}
   - component: {fileID: 1575413411934052833}
   - component: {fileID: 6088683860747693097}
+  - component: {fileID: 6586794922626458378}
   m_Layer: 0
   m_Name: Cactus_Leafy_02 (3)
   m_TagString: Untagged
@@ -1223,6 +1364,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6586794922626458378
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468504686048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.466243, z: 3}
+  m_Center: {x: 0.06721602, y: 0.75399363, z: 0.0431122}
 --- !u!1 &84421468658480010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,6 +1390,7 @@ GameObject:
   - component: {fileID: 84421468660477258}
   - component: {fileID: 5905663112699097680}
   - component: {fileID: 2395438143471759393}
+  - component: {fileID: 7242341204925229485}
   m_Layer: 0
   m_Name: Cactus_Tall_01 (3)
   m_TagString: Untagged
@@ -1330,6 +1485,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7242341204925229485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468658480010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.1429348, z: 3}
+  m_Center: {x: 0.017374713, y: 1.4845846, z: 0.0058231815}
 --- !u!1 &84421468775476242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1511,7 @@ GameObject:
   - component: {fileID: 84421468777476818}
   - component: {fileID: 3839053423832826815}
   - component: {fileID: 192644628523740334}
+  - component: {fileID: 1394991229594864756}
   m_Layer: 0
   m_Name: Cactus_Leafy_02 (11)
   m_TagString: Untagged
@@ -1437,6 +1606,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1394991229594864756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468775476242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.466243, z: 3}
+  m_Center: {x: 0.06720362, y: 0.7539935, z: 0.043108385}
 --- !u!1 &84421468831816262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1632,7 @@ GameObject:
   - component: {fileID: 84421468829615238}
   - component: {fileID: 4397559749080506468}
   - component: {fileID: 3735602057089713638}
+  - component: {fileID: 5368357517587513340}
   m_Layer: 0
   m_Name: Cactus_Tall_04 (10)
   m_TagString: Untagged
@@ -1544,6 +1727,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5368357517587513340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468831816262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.859958, z: 3}
+  m_Center: {x: 0.0004629792, y: 1.8148779, z: 0.000015258789}
 --- !u!1 &84421468848539678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1753,7 @@ GameObject:
   - component: {fileID: 84421468846347998}
   - component: {fileID: 2706587873627029199}
   - component: {fileID: 7168850545450177272}
+  - component: {fileID: 3974035632629625281}
   m_Layer: 0
   m_Name: Rock_Large (5)
   m_TagString: Untagged
@@ -1651,6 +1848,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3974035632629625281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421468848539678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 4.0906887, z: 3}
+  m_Center: {x: 0.07488944, y: 1.9607869, z: -0.0336153}
 --- !u!1 &84421469072602636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1874,7 @@ GameObject:
   - component: {fileID: 84421469070665932}
   - component: {fileID: 3886548246285507307}
   - component: {fileID: 7123280749827343943}
+  - component: {fileID: 5333256763136329666}
   m_Layer: 0
   m_Name: Cactus_Tall_03 (9)
   m_TagString: Untagged
@@ -1758,6 +1969,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48f135e988fee4981de7014ef41204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5333256763136329666
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84421469072602636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.843629, z: 3}
+  m_Center: {x: -0.017298523, y: 1.8517225, z: 0.0014735166}
 --- !u!1 &332437092357564245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +2088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002760313911992392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 68.36557, y: 7.207241, z: 0.17927933}
+  m_LocalPosition: {x: 68.36557, y: 6.7, z: 0.17927933}
   m_LocalScale: {x: 1, y: 1, z: 1.1124003}
   m_Children: []
   m_Father: {fileID: 4928047693669376937}
@@ -2023,7 +2247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6744653745863039288}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 4928047693669376937}

@@ -5,7 +5,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Collider))]
-    public class ImpactableObject : MonoBehaviour, IInteractableObject
+    public class ImpactableObject : MonoBehaviour
     {
         private Collider _collider;
 
@@ -27,26 +27,10 @@
             transform.localRotation = Quaternion.Euler(_startingRot);
         }
 
-        public Transform Transform => transform;
 
-        public void Active()
+        private void OnTriggerEnter(Collider other)
         {
-            gameObject.SetActive(true);
-        }
-
-        public void DeActive()
-        {
-            gameObject.SetActive(false);
-        }
-
-        public void EndInteract(IInteractionalObject obj)
-        {
-        
-        }
-
-        public void Interact(IInteractionalObject obj)
-        {
-            if(obj is BaseCar car && _routine == null)
+            if (other.GetComponentInParent<BaseCar>() is BaseCar car && _routine == null)
             {
                 _routine = StartCoroutine(ImpactAction(car));
             }
@@ -57,7 +41,7 @@
             Rigidbody body = gameObject.AddComponent<Rigidbody>();
 
             _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             Destroy(body);
             _routine = null;
         }

@@ -70,7 +70,7 @@
 
         public virtual void Active()
         {
-            gameObject.SetActive(true);
+            gameObject?.SetActive(true);
         }
 
         public virtual void DeActive()

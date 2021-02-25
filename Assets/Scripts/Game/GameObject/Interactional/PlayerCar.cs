@@ -59,16 +59,9 @@
 
         protected override void KeepInLine()
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z + 5), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 3f * 1)) + .04f);
-            if (transform.rotation.y > .3f || transform.rotation.y < -.3f)
-            {
-                Brake();
-            }
-            else
-            {
-                BrakeOff();
-            }
+            
             foreach (Wheel wheel in _wheels)
             {
                 wheel.Interact(this);
@@ -151,14 +144,17 @@
             if(v < -.5f)
             {
                 Brake();
-            }else if(v > .5f)
-            {
-                OnChassisUp(true);
-                BrakeOff();
             }
             else
             {
                 BrakeOff();
+            }
+            if(v > .25f)
+            {
+                OnChassisUp(true);
+            }
+            else
+            {
                 OnChassisUp(false);
             }
         }
@@ -166,7 +162,6 @@
         private void OnChassisUp(bool obj)
         {
             _bodyPosTarget = obj ? _defaultBodyPos + (Vector3.up) * _carBodyUpDistance : _defaultBodyPos;
-            //_collider.enabled = !obj;
             _chassisUp = obj;
         }
 

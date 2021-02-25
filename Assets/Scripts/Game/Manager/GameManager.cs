@@ -46,6 +46,11 @@
             UnRegistration();
         }
 
+        private void OnApplicationQuit()
+        {
+            UnRegistration();
+        }
+
         private void Registration()
         {
             SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Register(OnPlayerCarPassedOver);
@@ -78,8 +83,10 @@
                 int count = 0;
                 do
                 {
+                    if (!_playerCar)
+                        break;
                     randomPlat = _interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)];
-                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 10f)
+                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 30f)
                     {
                         NPCCar npcCar = _npcCarFactory.GetObject();
                         npcCar.Active();
