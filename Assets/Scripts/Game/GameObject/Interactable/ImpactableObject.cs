@@ -13,6 +13,7 @@
         private Vector3 _startingRot;
 
         private Coroutine _routine;
+        private Rigidbody _body;
 
         private void Awake()
         {
@@ -25,25 +26,29 @@
         {
             transform.localPosition = _startingPos;
             transform.localRotation = Quaternion.Euler(_startingRot);
+            if (_body)
+            {
+                Destroy(_body);
+            }
         }
 
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<BaseCar>() is BaseCar car && _routine == null)
+            if (other.GetComponentInParent<BaseCar>() is BaseCar car && _body == null && car != GetComponentInParent<BaseCar>())
             {
-                _routine = StartCoroutine(ImpactAction(car));
+                _body = gameObject.AddComponent<Rigidbody>();
+                _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
             }
         }
 
-        private IEnumerator ImpactAction(BaseCar car)
+        private void OnCollisionEnter(Collision collision)
         {
-            Rigidbody body = gameObject.AddComponent<Rigidbody>();
-
-            _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
-            yield return new WaitForSeconds(5f);
-            Destroy(body);
-            _routine = null;
+            if(collision.collider.GetComponent<BaseCar>() is BaseCar car && car != GetComponentInParent<BaseCar>() && _body)
+            {
+                _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
+            }
         }
+
     }
 }

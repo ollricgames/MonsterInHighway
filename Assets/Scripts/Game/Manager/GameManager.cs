@@ -86,7 +86,7 @@
                     if (!_playerCar)
                         break;
                     randomPlat = _interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)];
-                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 30f)
+                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 100f)
                     {
                         NPCCar npcCar = _npcCarFactory.GetObject();
                         npcCar.Active();
