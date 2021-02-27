@@ -13,10 +13,10 @@
 
         private void OnTriggerStay(Collider other)
         {
-            if (!_ownCar)
+            if (!_ownCar || other.CompareTag("Brake"))
                 return;
-            IInteractionalObject obj = other.GetComponent<IInteractionalObject>();
-            if(obj != null && obj is BaseCar car && car != _ownCar)
+            BaseCar obj = other.GetComponentInParent<BaseCar>();
+            if (obj != null && obj is BaseCar car && car != _ownCar)
             {
                 _ownCar.Brake();
             }
@@ -24,9 +24,9 @@
 
         private void OnTriggerExit(Collider other)
         {
-            if (!_ownCar)
+            if (!_ownCar || other.CompareTag("Brake"))
                 return;
-            IInteractionalObject obj = other.GetComponent<IInteractionalObject>();
+            BaseCar obj = other.GetComponentInParent<BaseCar>();
             if (obj != null && obj is BaseCar car && car != _ownCar)
             {
                 _ownCar.BrakeOff();

@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_MaxHandbrakeTorque: 100000000
   m_Downforce: 5
   m_SpeedType: 0
-  m_Topspeed: 150
+  m_Topspeed: 180
   m_RevRangeBoundary: 1
   m_SlipLimit: 0.9
   m_BrakeTorque: 20000
@@ -1316,12 +1316,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d1715d62fa7b746a14c4edba22cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rightLine: {x: 2.5, y: 0, z: 0}
-  _leftLine: {x: -2.5, y: 0, z: 0}
+  _rightLine: {x: 3.75, y: 0, z: 0}
+  _leftLine: {x: -3.5, y: 0, z: 0}
   _defaultAcceleration: 1
   _carBody: {fileID: 8402849740253271486}
   _carBodyUpDistance: 3
   _bodyUpSpeed: 5
+  _specialLines:
+  - {x: -5.5, y: 0, z: 0}
+  - {x: -1.9, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 5.75, y: 0, z: 0}
 --- !u!1 &4689689661469183016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,13 +1783,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4689689661469183056}
-  m_LocalRotation: {x: 0.16096616, y: 0.12268857, z: 0.017273376, w: 0.97915226}
+  m_LocalRotation: {x: 0.35167328, y: 0.10868358, z: -0.009794821, w: 0.9297408}
   m_LocalPosition: {x: 0.5258858, y: 0.54023445, z: 2.1796346}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4689689661469544556}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 41, y: 14.990001, z: 4.425}
 --- !u!108 &4689689661458874728
 Light:
   m_ObjectHideFlags: 0
@@ -1870,13 +1875,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4689689661469183058}
-  m_LocalRotation: {x: 0.16331728, y: -0.13791502, z: 0.0023226812, w: 0.97688365}
+  m_LocalRotation: {x: 0.35180664, y: -0.1265712, z: 0.030714434, w: 0.9269673}
   m_LocalPosition: {x: -0.39033794, y: 0.52466714, z: 2.1627889}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4689689661469544556}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 41.3, y: -16.474, z: -2.45}
 --- !u!108 &4689689661458874730
 Light:
   m_ObjectHideFlags: 0

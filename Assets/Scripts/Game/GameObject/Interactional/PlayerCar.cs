@@ -28,6 +28,9 @@
         private List<Wheel> _wheels;
         private Rigidbody _body;
 
+        [SerializeField] private List<Vector3> _specialLines;
+        private int _lineIndex = 0;
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -41,6 +44,8 @@
                 _wheels.Add(wheel.GetComponent<Wheel>());
             }
             _body = GetComponent<Rigidbody>();
+            _lineIndex = 2;
+            _target = _specialLines[_lineIndex];
         }
 
         public override void Active()
@@ -131,15 +136,19 @@
         {
             SignalBus<SignalJoystickMultipier, float, float>.Instance.UnRegister(OnJoystickMultipier);
         }
-
+        private bool _canLineChanged;
         private void OnJoystickMultipier(float h, float v)
         {
-            if(h < -.5f)
+            if(h < -.5f && _canLineChanged)
             {
                 OnLineChanged(true);
-            }else if(h > .5f)
+            }else if(h > .5f && _canLineChanged)
             {
                 OnLineChanged(false);
+            }
+            if(h == 0)
+            {
+                _canLineChanged = true;
             }
             if(v < -.5f)
             {
@@ -167,7 +176,13 @@
 
         private void OnLineChanged(bool isLeftLine)
         {
-            _target = isLeftLine ? _leftLine : _rightLine;
+            _lineIndex += isLeftLine ? -1 : 1;
+            if (_lineIndex >= _specialLines.Count)
+                _lineIndex = _specialLines.Count-1;
+            if (_lineIndex < 0)
+                _lineIndex = 0;
+            _target = _specialLines[_lineIndex];
+            _canLineChanged = false;
         }
 
         public void CarEnterTunnel()

@@ -12,6 +12,9 @@
 
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private int _platformYogunlugu = 0;
+        [SerializeField] private int _arabaYogunlugu = 0;
+
         private IFactory<PlayerCar> _playerCarFactory;
         private IFactory<NPCCar> _npcCarFactory;
         private IFactory<BasePlatform> _platformFactory;
@@ -28,6 +31,9 @@
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
+            Constant.defaultPlatformInPool = _platformYogunlugu;
+            Constant.defaultNPCCarInPool = _arabaYogunlugu;
             Initialize();
         }
 
@@ -86,7 +92,7 @@
                     if (!_playerCar)
                         break;
                     randomPlat = _interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)];
-                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 100f)
+                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 500f)
                     {
                         NPCCar npcCar = _npcCarFactory.GetObject();
                         npcCar.Active();
@@ -95,7 +101,7 @@
                     }
                     count++;
 
-                } while (randomPlat.IsEmpty || count < 100);
+                } while (randomPlat.IsEmpty || count < 50);
             }
         }
 
