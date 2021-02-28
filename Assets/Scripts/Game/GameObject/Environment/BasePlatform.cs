@@ -16,7 +16,7 @@
 
         private List<IInteractionalObject> _onObjects;
 
-        public bool IsEmpty { get => _onObjects.Count == 0 && !_playerIn; }
+        public bool IsEmpty { get => _onObjects.Count < 3 && !_playerIn; }
         private bool _playerIn = false;
 
         private void Awake()

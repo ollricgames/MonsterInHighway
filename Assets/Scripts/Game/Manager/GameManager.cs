@@ -7,6 +7,7 @@
     using Base.Game.Signal;
     using Base.Util;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -19,15 +20,17 @@
         private IFactory<NPCCar> _npcCarFactory;
         private IFactory<BasePlatform> _platformFactory;
 
-        private List<IInteractionalObject> _interactionalObjectInGame;
-        private List<BasePlatform> _interactableObjectInGame;
+        private List<BasePlatform> _activePlatforms;
 
 
         private int _totalActivatePlatformCount;
         private BasePlatform _lastPlatform;
         private List<BasePlatform> _playerCarPassedOverPlatforms;
+        private List<NPCCar> _npcCarsInPool;
 
         private PlayerCar _playerCar;
+
+        private Coroutine _npcCarSpawnRoutine;
 
         private void Awake()
         {
@@ -39,9 +42,9 @@
 
         private void Initialize()
         {
-            _interactionalObjectInGame = new List<IInteractionalObject>();
-            _interactableObjectInGame = new List<BasePlatform>();
+            _activePlatforms = new List<BasePlatform>();
             _playerCarPassedOverPlatforms = new List<BasePlatform>();
+            _npcCarsInPool = new List<NPCCar>();
             Registration();
             SetFactories();
             InitialMap();
@@ -73,35 +76,51 @@
             SignalBus<SignalNPCCarDeActive, NPCCar>.Instance.UnRegister(OnNPCCarDeActive);
         }
 
-        private void OnNPCCarDeActive(NPCCar obj)
+        private IEnumerator NPCCarSpawnerAction()
         {
-            if (!_lastPlatform)
-                return;
-            if (_lastPlatform.IsEmpty)
+            var wait2f = new WaitForSeconds(3f);
+            var waitFixed = new WaitForFixedUpdate();
+
+            while (true)
             {
-                NPCCar npcCar = _npcCarFactory.GetObject();
-                npcCar.Active();
-                _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
-            }
-            else
-            {
-                BasePlatform randomPlat;
-                int count = 0;
-                do
+                Debug.LogError(_npcCarsInPool.Count);
+                if(_npcCarsInPool.Count > 0 ||true)
                 {
-                    if (!_playerCar)
-                        break;
-                    randomPlat = _interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)];
-                    if (randomPlat.IsEmpty && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 500f)
+                    if (_lastPlatform.IsEmpty)
                     {
                         NPCCar npcCar = _npcCarFactory.GetObject();
                         npcCar.Active();
-                        randomPlat.SpawnInteractionalObjectOnPlatform(npcCar);
-                        break;
+                        _npcCarsInPool.Remove(npcCar);
+                        _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
                     }
-                    count++;
+                    else
+                    {
+                        if (!_playerCar)
+                        {
+                            yield return waitFixed;
+                            continue;
+                        }
+                        BasePlatform randomPlat;
+                        
+                        randomPlat = _activePlatforms[UnityEngine.Random.Range(0, _activePlatforms.Count)];
+                        if (randomPlat.IsEmpty && _playerCar.transform.position.z < randomPlat.transform.position.z && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 300f)
+                        {
+                            NPCCar npcCar = _npcCarFactory.GetObject();
+                            npcCar.Active();
+                            _npcCarsInPool.Remove(npcCar);
+                            randomPlat.SpawnInteractionalObjectOnPlatform(npcCar);
+                        }
+                    }
+                }
+                yield return wait2f;
+            }
+        }
 
-                } while (randomPlat.IsEmpty || count < 50);
+        private void OnNPCCarDeActive(NPCCar obj)
+        {
+            if (!_npcCarsInPool.Contains(obj))
+            {
+                _npcCarsInPool.Add(obj);
             }
         }
 
@@ -115,7 +134,7 @@
             if (_playerCarPassedOverPlatforms.Contains(obj))
                 return;
             _playerCarPassedOverPlatforms.Add(obj);
-            if(_playerCarPassedOverPlatforms.Count > 5)
+            if(_playerCarPassedOverPlatforms.Count > 3)
             {
                 BasePlatform newPlatform = _platformFactory.GetObject();
                 newPlatform.SetPosition(_lastPlatform.EndPoint);
@@ -123,9 +142,9 @@
                 _lastPlatform = newPlatform;
                 BasePlatform prevPlat = _playerCarPassedOverPlatforms[0];
                 prevPlat.DeActive();
-                if (!_interactableObjectInGame.Contains(newPlatform))
+                if (!_activePlatforms.Contains(newPlatform))
                 {
-                    _interactableObjectInGame.Add(newPlatform);
+                    _activePlatforms.Add(newPlatform);
                 }
             }
         }
@@ -151,7 +170,7 @@
             BasePlatform prevPlatform = _platformFactory.GetObject();
             prevPlatform.SetPosition(Vector3.zero);
             prevPlatform.Active();
-            _interactableObjectInGame.Add(prevPlatform);
+            _activePlatforms.Add(prevPlatform);
 
             for(int i = 0; i < Constant.defaultPlatformInPool; i++)
             {
@@ -159,33 +178,19 @@
                 nextPlatform.SetPosition(prevPlatform.EndPoint);
                 prevPlatform = nextPlatform;
                 prevPlatform.Active();
-                _interactableObjectInGame.Add(prevPlatform);
+                _activePlatforms.Add(prevPlatform);
                 _lastPlatform = prevPlatform;
             }
             _totalActivatePlatformCount += Constant.defaultPlatformInPool;
-            int carCount = 0;
-            while(carCount < Constant.defaultNPCCarInPool)
-            {
-                BasePlatform randomPlat = (_interactableObjectInGame[UnityEngine.Random.Range(0, _interactableObjectInGame.Count)] as BasePlatform);
-                if (randomPlat.IsEmpty)
-                {
-                    NPCCar npcCar =  _npcCarFactory.GetObject();
-                    npcCar.Active();
-                    _interactionalObjectInGame.Add(npcCar);
-                
-                    randomPlat.SpawnInteractionalObjectOnPlatform(npcCar);
-                    carCount++;
-                }
-            }
+            _npcCarSpawnRoutine = StartCoroutine(NPCCarSpawnerAction());
         }
 
         private void OnStartGame()
         {
             PlayerCar playerCar = _playerCarFactory.GetObject();
-            (_interactableObjectInGame[1] as BasePlatform).SpawnInteractionalObjectOnPlatform(playerCar);
+            (_activePlatforms[1] as BasePlatform).SpawnInteractionalObjectOnPlatform(playerCar);
             _playerCar = playerCar;
             playerCar.Active();
-            _interactionalObjectInGame.Add(playerCar);
         }
 
 

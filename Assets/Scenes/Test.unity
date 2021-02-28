@@ -730,8 +730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cda27fd66714af4f99f45b9a33c47a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platformYogunlugu: 15
-  _arabaYogunlugu: 12
+  _platformYogunlugu: 8
+  _arabaYogunlugu: 20
 --- !u!1 &1777412882
 GameObject:
   m_ObjectHideFlags: 3
