@@ -46,7 +46,7 @@
             else
             {
                 if((_collider.transform.position.x != _defaultPos.position.x))
-                    _collider.transform.position = Vector3.MoveTowards(_collider.transform.position, new Vector3(_defaultPos.position.x, _defaultPos.transform.position.y, _defaultPos.position.z), Time.deltaTime * 2);
+                    _collider.transform.position = Vector3.MoveTowards(_collider.transform.position, new Vector3(_defaultPos.position.x, _defaultPos.position.y, _defaultPos.position.z), Time.deltaTime * 2);
             }
             _suspensionDownPart.Interact(this);
         }

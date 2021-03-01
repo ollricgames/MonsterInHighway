@@ -83,34 +83,12 @@
 
             while (true)
             {
-                Debug.LogError(_npcCarsInPool.Count);
-                if(_npcCarsInPool.Count > 0 ||true)
+                if (_lastPlatform.IsEmpty)
                 {
-                    if (_lastPlatform.IsEmpty)
-                    {
-                        NPCCar npcCar = _npcCarFactory.GetObject();
-                        npcCar.Active();
-                        _npcCarsInPool.Remove(npcCar);
-                        _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
-                    }
-                    else
-                    {
-                        if (!_playerCar)
-                        {
-                            yield return waitFixed;
-                            continue;
-                        }
-                        BasePlatform randomPlat;
-                        
-                        randomPlat = _activePlatforms[UnityEngine.Random.Range(0, _activePlatforms.Count)];
-                        if (randomPlat.IsEmpty && _playerCar.transform.position.z < randomPlat.transform.position.z && Vector3.Distance(_playerCar.transform.position, randomPlat.transform.position) > 300f)
-                        {
-                            NPCCar npcCar = _npcCarFactory.GetObject();
-                            npcCar.Active();
-                            _npcCarsInPool.Remove(npcCar);
-                            randomPlat.SpawnInteractionalObjectOnPlatform(npcCar);
-                        }
-                    }
+                    NPCCar npcCar = _npcCarFactory.GetObject();
+                    npcCar.Active();
+                    _npcCarsInPool.Remove(npcCar);
+                    _lastPlatform.SpawnInteractionalObjectOnPlatform(npcCar);
                 }
                 yield return wait2f;
             }

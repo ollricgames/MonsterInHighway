@@ -89,6 +89,9 @@
             if(_timer > 8f)
             {
                 transform.position = _onPlatform.transform.position;
+                _body.velocity = Vector3.zero;
+                _body.angularVelocity = Vector3.zero;
+                transform.rotation = Quaternion.Euler(Vector3.zero);
             }
         }
 
