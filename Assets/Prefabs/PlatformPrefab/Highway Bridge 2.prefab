@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4601839823007265132}
   - component: {fileID: 4601839823008583110}
   - component: {fileID: 4601839823009533910}
-  - component: {fileID: 4601839823014026578}
   - component: {fileID: 2290769899013544063}
+  - component: {fileID: 7292006462985751380}
   m_Layer: 0
   m_Name: Highway Bridge 2
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4601839823007521958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601839823007521958}
-  m_Mesh: {fileID: 4300000, guid: 306a3142baf3c0f48acf183ab9a53a05, type: 3}
+  m_Mesh: {fileID: 7296065913792047036, guid: 69aaa47ccb5352b44817173500662d74, type: 3}
 --- !u!23 &4601839823009533910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4601839823014026578
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4601839823007521958}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 306a3142baf3c0f48acf183ab9a53a05, type: 3}
 --- !u!65 &2290769899013544063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,3 +95,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 80, y: 10.82991, z: 21.617575}
   m_Center: {x: -37.5, y: 0.70253754, z: 6.250229}
+--- !u!64 &7292006462985751380
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4601839823007521958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7296065913792047036, guid: 69aaa47ccb5352b44817173500662d74, type: 3}
