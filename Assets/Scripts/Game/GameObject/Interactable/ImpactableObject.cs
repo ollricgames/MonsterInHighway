@@ -38,7 +38,6 @@
             if (other.GetComponentInParent<BaseCar>() is BaseCar car && _body == null && car != GetComponentInParent<BaseCar>())
             {
                 _body = gameObject.AddComponent<Rigidbody>();
-                _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
             }
         }
 
