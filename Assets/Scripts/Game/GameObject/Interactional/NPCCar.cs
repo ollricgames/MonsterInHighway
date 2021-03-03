@@ -33,7 +33,7 @@
 
         private void OnEnable()
         {
-            _defaultAcceleration = Random.Range(0.3f, 1f);
+            _defaultAcceleration = Random.Range(0.75f, 1f);
             _acceleration = _defaultAcceleration;
         }
 
@@ -54,12 +54,12 @@
         {
             base.Move();
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z), .1f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_rotTarget), .1f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_rotTarget), .5f);
         }
 
         private void FixedUpdate()
         {
-            KeepInLine();
+            //KeepInLine();
             Move();
         }
 

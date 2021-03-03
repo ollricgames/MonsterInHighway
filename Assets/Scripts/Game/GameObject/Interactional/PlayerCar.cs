@@ -64,8 +64,8 @@
 
         protected override void KeepInLine()
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z + 5), (_controller.CurrentSpeed / (_controller.MaxSpeed * 4 * 6)) + .025f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / 3f * 1)) + .04f);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_target.x, transform.position.y, transform.position.z + 3), (_controller.CurrentSpeed / (_controller.MaxSpeed * 1 * 2)) + .025f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.zero), (_controller.CurrentSpeed / (_controller.MaxSpeed / .75f * 1)) + .04f);
             
             foreach (Wheel wheel in _wheels)
             {
@@ -142,14 +142,14 @@
         private bool _canLineChanged;
         private void OnJoystickMultipier(float h, float v)
         {
-            if(h < -.5f && _canLineChanged)
+            if(h < -.35f && _canLineChanged)
             {
                 OnLineChanged(true);
-            }else if(h > .5f && _canLineChanged)
+            }else if(h > .35f && _canLineChanged)
             {
                 OnLineChanged(false);
             }
-            if(h == 0)
+            if(h == 0 || h < -.7f || h > .7f)
             {
                 _canLineChanged = true;
             }

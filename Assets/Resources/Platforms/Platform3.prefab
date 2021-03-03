@@ -129,7 +129,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 137.20311, y: 200, z: 18}
+  m_Size: {x: 137.20311, y: 200, z: 15}
   m_Center: {x: 67.091545, y: 0, z: -0.104085684}
 --- !u!114 &413938471
 MonoBehaviour:
@@ -247,22 +247,32 @@ PrefabInstance:
     - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
         type: 3}
       propertyPath: m_Size.z
-      value: 37.568367
+      value: 23.522495
       objectReference: {fileID: 0}
     - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
         type: 3}
       propertyPath: m_Center.z
-      value: 14.225608
+      value: 12.623827
       objectReference: {fileID: 0}
     - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
         type: 3}
       propertyPath: m_Size.x
-      value: 159.99365
+      value: 190.6589
       objectReference: {fileID: 0}
     - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
         type: 3}
       propertyPath: m_Center.x
-      value: -77.496826
+      value: -71.77138
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 14.219978
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290769899013544063, guid: 9bd14d7ff58dbd74da2122c170b73af4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 2.3975716
       objectReference: {fileID: 0}
     - target: {fileID: 4601839823007265132, guid: 9bd14d7ff58dbd74da2122c170b73af4,
         type: 3}
@@ -323,6 +333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Highway Bridge 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601839823009533910, guid: 9bd14d7ff58dbd74da2122c170b73af4,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd14d7ff58dbd74da2122c170b73af4, type: 3}

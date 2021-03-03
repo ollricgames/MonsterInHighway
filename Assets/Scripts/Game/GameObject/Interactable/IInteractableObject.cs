@@ -2,7 +2,6 @@
 {
     using Base.Game.GameObject.Interactional;
     using UnityEngine;
-
     public interface IInteractableObject
     {
         Transform Transform { get; }

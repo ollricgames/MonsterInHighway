@@ -35,7 +35,7 @@
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<BaseCar>() is BaseCar car && _body == null && car != GetComponentInParent<BaseCar>())
+            if (other.GetComponentInParent<PlayerCar>() is PlayerCar car && _body == null)
             {
                 _body = gameObject.AddComponent<Rigidbody>();
             }
@@ -43,7 +43,7 @@
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.collider.GetComponent<BaseCar>() is BaseCar car && car != GetComponentInParent<BaseCar>() && _body)
+            if(collision.collider.GetComponent<PlayerCar>() is BaseCar car && _body)
             {
                 _collider.attachedRigidbody.AddExplosionForce(car.CurrentSpeed * Time.fixedDeltaTime, transform.position, 10F, 3f);
             }
