@@ -78,12 +78,12 @@
 
         private IEnumerator NPCCarSpawnerAction()
         {
-            var wait2f = new WaitForSeconds(3f);
+            var wait2f = new WaitForSeconds(1.5f);
             var waitFixed = new WaitForFixedUpdate();
 
             while (true)
             {
-                if (_lastPlatform.IsEmpty)
+                if (_lastPlatform.IsEmpty && (_npcCarFactory.GetTotalObject() < 11 || _npcCarsInPool.Count > 0))
                 {
                     NPCCar npcCar = _npcCarFactory.GetObject();
                     npcCar.Active();

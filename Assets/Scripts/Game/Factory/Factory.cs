@@ -8,6 +8,7 @@
     {
         private List<T> _pool;
         private List<T> _prefabs;
+        private int _totalObject;
         private Factory()
         {
             _pool = new List<T>();
@@ -37,7 +38,13 @@
                 _pool.Remove(inPoolObj);
                 return inPoolObj;
             }
+            _totalObject += 1;
             return MonoBehaviour.Instantiate(_prefabs[UnityEngine.Random.Range(0, _prefabs.Count)].gameObject).GetComponent<T>();
+        }
+
+        public int GetTotalObject()
+        {
+            return _totalObject;
         }
 
         public class Builder
@@ -69,6 +76,7 @@
                 if (!_factory._prefabs.Contains(prefab))
                 {
                     T initialObject = MonoBehaviour.Instantiate(prefab).GetComponent<T>();
+                    _factory._totalObject += 1;
                     _factory._pool.Add(initialObject);
                     initialObject.gameObject.SetActive(false);
                     _factory._prefabs.Add(prefab);

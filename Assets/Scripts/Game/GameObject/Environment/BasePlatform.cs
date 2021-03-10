@@ -14,14 +14,31 @@
 
         public Transform Transform => transform;
 
-        private List<IInteractionalObject> _onObjects;
+        private List<NPCCar> _onObjects;
 
-        public bool IsEmpty { get => _onObjects.Count < 3 && !_playerIn; }
+        public bool IsEmpty { get 
+            {
+                if (_playerIn)
+                    return false;
+                foreach (int i in _lineStatu)
+                {
+                    if (i == 0)
+                        return true;
+                }
+                return false;
+            } 
+        }
         private bool _playerIn = false;
+
+        private int[] _lineStatu = new int[4];
 
         private void Awake()
         {
-            _onObjects = new List<IInteractionalObject>();
+            _onObjects = new List<NPCCar>();
+            for(int i = 0; i < _lineStatu.Length-1; i++)
+            {
+                _lineStatu[i] = 0;
+            }
         }
 
         public void SetPosition(Vector3 pos)
@@ -35,13 +52,19 @@
                 return;
             if(obj is NPCCar car)
             {
-                car.Transform.position = transform.position;
-                car.PlaceOnLine(Random.Range(0, 2) != 0);
-                _onObjects.Add(obj);
+                car.Transform.position = transform.position + (Vector3.right * (Random.Range(-3, 3))) + (Vector3.up * 3f);
+                int rand = Random.Range(0, _lineStatu.Length);
+                while (_lineStatu[rand] != 0)
+                {
+                    rand = Random.Range(0, _lineStatu.Length);
+                }
+                car.PlaceOnLine(rand);
+                _onObjects.Add(car);
             }
             else if(obj is PlayerCar)
             {
                 obj.Transform.position = transform.position;
+                _playerIn = true;
             }
         }
 
@@ -84,10 +107,13 @@
                 {
                     SignalBus<SignalPlayerCarPassedOver, BasePlatform>.Instance.Fire(this);
                     _playerIn = true;
+                }else if(obj is NPCCar npcCar)
+                {
+                    if (_onObjects.Contains(npcCar))
+                        return;
+                    _lineStatu[(obj as NPCCar).LineNumber] = 1;
+                    _onObjects.Add(npcCar);
                 }
-                if (_onObjects.Contains(obj) || obj is PlayerCar)
-                    return;
-                _onObjects.Add(obj);
             }
         }
 
@@ -98,7 +124,14 @@
             {
                 if (obj is PlayerCar)
                     _playerIn = false;
-                _onObjects.Remove(obj);
+                else if(obj is NPCCar npcCar)
+                {
+                    _onObjects.Remove(npcCar);
+                    if(!_onObjects.Find(x => x.LineNumber == npcCar.LineNumber))
+                    {
+                        _lineStatu[npcCar.LineNumber] = 0;
+                    }
+                }
             }
         }
 

@@ -4,30 +4,30 @@
     using UnityEngine;
     public class NPCCar : BaseCar
     {
-        [SerializeField] private Transform _chassisTransform = null;
+        [SerializeField] private GameObject _chassis = null;
+        [SerializeField] private GameObject _crashedForm = null;
         private Vector3 _rotTarget;
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
+        public int LineNumber { get; set; }
 
-        public void PlaceOnLine(bool isForwardLine)
+        public void PlaceOnLine(int lineNumber)
         {
-            if (isForwardLine)
+            if (lineNumber > 1)
             {
                 _rightLine = Vector3.right * 5.75f;
                 _leftLine = Vector3.right * 2f;
-                _target = Random.Range(0,2) == 0 ? _rightLine : _leftLine;
+                _target = lineNumber == 3 ? _rightLine : _leftLine;
                 transform.rotation = Quaternion.Euler(Vector3.zero);
                 _rotTarget = Vector3.zero;
+                LineNumber = lineNumber;
             }
             else
             {
                 _rightLine = Vector3.right * -5.5f;
                 _leftLine = Vector3.right * -1.9f;
-                _target = Random.Range(0, 2) == 0 ? _rightLine : _leftLine;
+                _target = lineNumber == 1 ? _rightLine : _leftLine;
                 transform.rotation = Quaternion.Euler(Vector3.up * 180);
                 _rotTarget = Vector3.up * 180;
+                LineNumber = lineNumber;
             }
         }
 
@@ -45,9 +45,13 @@
         public override void Active()
         {
             base.Active();
-            _acceleration = .5f;
+            _acceleration = _defaultAcceleration;
             _handbrake = 0f;
-            _chassisTransform.localScale = Vector3.one;
+            if (_crashedForm)
+            {
+                _chassis.SetActive(true);
+                _crashedForm.SetActive(false);
+            }
         }
 
         protected override void Move()
@@ -65,7 +69,11 @@
 
         public void Crashed(float _squeezeValue)
         {
-            _chassisTransform.localScale = new Vector3(1f, _squeezeValue, 1f);
+            if (_crashedForm)
+            {
+                _chassis.SetActive(false);
+                _crashedForm.SetActive(true);
+            }
             _acceleration = _defaultAcceleration * -1;
             _handbrake = 1f;
         }
